@@ -1,0 +1,42 @@
+<h1 class="text-center"><%= @course.name %></h1>
+<hr>
+<div class="row">
+    <div class="col-9">
+        <div class="row justify-content-between align-items-center">
+            <div>
+                Prerequisite: <%= @course.prerequisite %>
+            </div>
+            <% if @course.user == current_user || current_user.is_admin? %>
+              <%= link_to "Edit this course", edit_course_path(@course), class: "btn btn-success" %>
+            <% end %>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-sm-12 course-info">
+                <p>Category:
+                    <% @course.categories.each do |category| %>
+                        <%= link_to category.name, category_path(category), class: "btn btn-link" %>
+                    <% end %>
+                </p>
+                <p>Location:
+                    <% @course.locations.each do |location| %>
+                        <%= link_to location.name, location_path(location), class: "btn btn-link" %>
+                    <% end %>
+                </p>
+                <p>
+                    Course Description:
+                </p>
+                <p>
+                    <%= @course.description %>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 course-avatar">
+        <img src="https://secure.gravatar.com/avatar" alt="">
+        <p>Coordinator name: <%= @course.user.name %></p>
+    </div>
+</div>
+<div class="row mt-4 mb-4">
+    <%= link_to "Return to Course List", courses_path, class: "btn btn-primary" %>
+</div>

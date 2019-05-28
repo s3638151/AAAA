@@ -1,0 +1,22 @@
+<h1 class="text-center">All Coordinators</h1>
+<hr>
+<div class="card border-light">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <%= link_to "Courses", courses_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item"><%= link_to "Coordinators", coordinators_path, class: "nav-link" %></li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <% @users.each do |user| %>
+          <div class="row justify-content-center">
+            <div class="col-sm-2 text-center">
+                <img src="https://secure.gravatar.com/avatar" alt="">
+                <p>Coordinator name: <%= user.name %></p>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>

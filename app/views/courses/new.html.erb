@@ -1,0 +1,43 @@
+<h1 class="text-center">Create a new course</h1>
+<hr>
+<%= render "/shared/error_messages" %>
+<div class="card">
+    <div class="card-body">
+        <%= form_with scope: :course, local: true, url: courses_path do |form| %>
+        <div class="form-group">
+            <%= form.label :name %>
+            <%= form.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+            <%= form.label :prerequisite %>
+            <%= form.text_field :prerequisite, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+            <%= form.label :description %>
+            <%= form.text_area :description, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+            <%= form.label :category %>:
+            <% Category.all.each do |item| %>
+            <div class="form-check form-check-inline">
+                <%= form.check_box :categories, {class: 'form-check', multiple: true, id: item.name}, item.id %>
+                <label class="form-check-label" for="<%= item.name %>"><%= item.name %></label>
+            </div>
+            <% end %>
+        </div>
+        <div class="form-group">
+            <%= form.label :location %>:
+            <% Location.all.each do |item| %>
+            <div class="form-check form-check-inline">
+                <%= form.check_box :locations, {class: 'form-check', multiple: true, id: item.name}, item.id %>
+                <label class="form-check-label" for="<%= item.name %>"><%= item.name %></label>
+            </div>
+            <% end %>
+        </div>
+        <div class="form-group">
+            <%= form.file_field :image, class: "form-control-file" %>
+        </div>
+        <button class="btn btn-success btn-block">Create new course</button>
+        <% end %>
+    </div>
+</div>

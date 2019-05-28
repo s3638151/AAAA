@@ -1,0 +1,14 @@
+<h1 class="text-center">Edit location</h1>
+<hr>
+<%= render "/shared/error_messages" %>
+<div class="card">
+    <div class="card-body">
+        <%= form_with scope: @location, local: true, url: location_path(@location), method:'patch' do |form| %>
+        <div class="form-group">
+            <%= form.label :name %>
+            <%= form.text_field :name, class: 'form-control' %>
+        </div>
+        <button class="btn btn-success btn-block">Create new location</button>
+        <% end %>
+    </div>
+</div>

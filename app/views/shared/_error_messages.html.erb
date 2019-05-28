@@ -1,0 +1,15 @@
+<% if flash[:errors] %>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <p>Please correct the following errors:</p>
+    <ul>
+        <% flash[:errors].each do |key, errors| %>
+            <% errors.each do |error| %>
+            <li><%= key %> <%= error %></li>
+            <% end %>
+        <% end %>
+    </ul>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<% end %>

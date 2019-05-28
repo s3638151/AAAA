@@ -1,0 +1,22 @@
+<h1 class="text-center">Edit Coordinator</h1>
+<hr>
+<%= render "/shared/error_messages" %>
+<div class="card">
+    <div class="card-body">
+        <%= form_with scope: @user, local: true, url: show_user_path(@user), method:'patch' do |form| %>
+        <div class="form-group">
+            <%= form.label :name %>
+            <%= form.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+            <%= form.label :email %>
+            <%= form.text_field :email, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+            <%= form.label :password %>
+            <%= form.password_field :password, class: 'form-control' %>
+        </div>
+        <button class="btn btn-success btn-block">Register</button>
+        <% end %>
+    </div>
+</div>

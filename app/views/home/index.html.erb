@@ -1,0 +1,19 @@
+<div class="jumbotron text-center">
+    <h1>Welcome to Your Course App</h1>
+    <p>This is the home page for the RAD Assignment 2</p>
+    <%= link_to "Sign up", user_register_path, class: 'btn btn-danger' %>
+</div>
+
+<div class="row">
+    <div class="col-sm">
+        <h3>View Course as Guest User</h3>
+        <p>Browse and view courses as a guest and sign up later</p>
+        <%= link_to "Browse all courses", courses_path, class: 'btn btn-success' %>
+    </div>
+    <div class="col-sm">
+        <h3>Sign in to your account</h3>
+        <p>Update your courses, rate courses, view coordinator infomations</p>
+        <%= link_to "Log in to your account", user_login_path, class: 'btn btn-success' %>
+    </div>
+    <div class="col-sm"></div>
+</div>

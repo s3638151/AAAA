@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rad1</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+      <nav class="navbar navbar-light bg-light navbar-expand-lg">
+        <div class="container justify-content-between">
+            <% if session.include?(:user_id) %>
+              <%= link_to "YOURCOURSE", courses_path, class: "nav-brand btn btn-primary" %>
+            <% else %>
+              <%= link_to "YOURCOURSE", '/', class: "nav-brand btn btn-primary" %>
+            <% end %>
+            <div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown m-2">
+                        <a href="#" class="btn btn-primary dropdown-toggle" role="button" data-toggle="dropdown">Category</a>
+                        <div class="dropdown-menu">
+                            <% Category.all.each do |item| %>
+                              <%= link_to item.name, category_path(item), class: 'dropdown-item' %>
+                            <% end %>
+                            <% if session.include?(:user_id) %>
+                                <div class="dropdown-divider"></div>
+                              <%= link_to "Create Category", new_category_path, class: 'dropdown-item' %>
+                            <% end %>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown m-2">
+                        <a href="#" class="btn btn-primary dropdown-toggle" role="button" data-toggle="dropdown">Location</a>
+                        <div class="dropdown-menu">
+                            <% Location.all.each do |item| %>
+                              <%= link_to item.name, location_path(item), class: 'dropdown-item' %>
+                            <% end %>
+                            <% if session.include?(:user_id) %>
+                                <div class="dropdown-divider"></div>
+                                <%= link_to "Create Location", new_location_path, class: 'dropdown-item' %>
+                            <% end %>
+                        </div>
+                    </li>
+                    <% if session.include?(:user_id) %>
+                    <li class="nav-item dropdown m-2">
+                        <%= link_to "New Course", new_course_path, class: "btn btn-primary" %>
+                    </li>
+                    <% if current_user.is_admin? %>
+                      <li class="nav-item m-2">
+                        <%= link_to "Dashboard", dashboard_path, class: "btn btn-success" %>
+                      </li>
+                    <% end %>
+                    <li class="nav-item dropdown m-2">
+                        <a href="#" class="btn btn-danger dropdown-toggle" role="button" data-toggle="dropdown"><%= current_user.name %></a>
+                        <div class="dropdown-menu">
+                            <%= link_to "View Profile", show_user_path(current_user), class: "dropdown-item" %>
+                            <%= link_to "Edit Profile", edit_user_path(current_user), class: "dropdown-item" %>
+                            <div class="dropdown-divider"></div>
+                            <a href="/user/logout" class="dropdown-item">Logout</a>
+                        </div>
+                    </li>
+                    <% else %>
+                    <li class="nav-item dropdown m-2">
+                        <%= link_to 'Log in', user_login_path, class: 'btn btn-primary' %>
+                    </li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+      <% if flash.any? %>
+        <% flash.each do |key, message| %>
+        <% if key != 'errors' %>
+          <div class="alert alert-<%= key %> alert-dismissible" role="alert">
+            <%= message %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <% end %>
+        <% end %>
+      <% end %>
+      <%= yield %>
+      <div class="bottom">
+        <%= link_to "Contact us", contact_path, class:"btn btn-link" %>
+      </div>
+    </div>
+  </body>
+</html>

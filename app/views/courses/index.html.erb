@@ -1,0 +1,41 @@
+<h1 class="text-center">All Courses</h1>
+<hr>
+<div class="card border-light">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <%= link_to "Courses", courses_path, class: "nav-link active" %>
+            </li>
+            <li class="nav-item"><%= link_to "Coordinators", coordinators_path, class: "nav-link" %></li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <% @courses.each do |course| %>
+          <div class="row">
+            <div class="col-sm-2 course-avatar">
+                <img src="https://secure.gravatar.com/avatar" alt="">
+                <p>Coordinator name: <%= course.user.name %></p>
+            </div>
+            <div class="col-sm-6 course-info">
+                <%= link_to course.name, course_path(course), class: "h2" %>
+                <p class="mt-4">Prerequisite: <%= course.prerequisite %></p>
+                <p>Category:
+                    <% course.categories.each do |category| %>
+                      <%= link_to category.name, category_path(category), class: "btn btn-link" %>
+                    <% end %>
+                </p>
+                <p>Location:
+                    <% course.locations.each do |location| %>
+                      <%= link_to location.name, location_path(location), class: "btn btn-link" %>
+                    <% end %>
+                </p>
+                <p>Created: <%= time_ago_in_words(course.created_at) %> ago</p>
+                <p class="text-right">
+                    <%= link_to course.thumbs_up, thumbsup_course_path(course), class: "fa fa-thumbs-up" %>
+                    <%= link_to course.thumbs_down, thumbsdown_course_path(course), class: "fa fa-thumbs-down" %>
+                </p>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>

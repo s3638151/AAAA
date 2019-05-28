@@ -1,0 +1,25 @@
+<h1 class="text-center">All Courses</h1>
+<hr>
+<div class="row justify-content-center">
+    <div class="col-sm-2 text-center">
+        <img src="https://secure.gravatar.com/avatar" alt="">
+        <p>Coordinator name: <%= @user.name %></p>
+    </div>
+</div>
+<div class="card border-light">
+    <div class="card-body">
+        <% @user.courses.each do |course| %>
+          <div class="row justify-content-center">
+            <div class="col-sm-6 course-info">
+                <%= link_to course.name, course_path(course), class: "h2" %>
+                <p class="mt-4">Prerequisite: <%= course.prerequisite %></p>
+                <p>Created: <%= time_ago_in_words(course.created_at) %> ago</p>
+                <p class="text-right">
+                    <%= link_to course.thumbs_up, thumbsup_course_path(course), class: "fa fa-thumbs-up" %>
+                    <%= link_to course.thumbs_down, thumbsdown_course_path(course), class: "fa fa-thumbs-down" %>
+                </p>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
